@@ -1,4 +1,4 @@
-from app import app, db
+from app import app, db, routes
 
 
 @app.shell_context_processor

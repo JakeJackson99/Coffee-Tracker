@@ -1,23 +1,25 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
+<div class="col mb-4">
+    <div class="card h-100" style="width: 18rem;">
+        <div class="card-body">
 
-        <h5 class="card-title">{{ bean.name }}</h5>
+            <h5 class="card-title">{{ bean.name }}</h5>
 
-        <h6 class="card-subtitle mb-2 text-muted">
+            <h6 class="card-subtitle mb-2 text-muted">
 
-            {% if bean.country %}
-            {% if bean.region %}
-            {{ bean.country }}, {{ bean.region }}
-            {% endif %}
-            {{ bean.country }}
-            {% endif %}
+                {% if bean.country %}
+                {% if bean.region %}
+                {{ bean.country }}, {{ bean.region }}
+                {% endif %}
+                {{ bean.country }}
+                {% endif %}
 
-        </h6>
+            </h6>
 
-        <p class="card-text">
-            {% if bean.description %} {{ bean.description }} {% endif %}
-        </p>
+            <p class="card-text">
+                {% if bean.description %} {{ bean.description }} {% endif %}
+            </p>
 
-        <p class="card-text">{{ bean.rating }}/5</p>
+            <p class="card-text">{{ bean.rating }}/5</p>
+        </div>
     </div>
 </div>

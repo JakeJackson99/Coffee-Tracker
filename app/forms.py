@@ -13,5 +13,6 @@ class BeanForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     country = StringField('Country')
     region = StringField('Region')
-    description = StringField('Description', validators=[Length(min=0, max=80)])
+    description = StringField('Description', validators=[
+                              Length(min=0, max=80)])
     rating = IntegerField('Rating', validators=[DataRequired()])

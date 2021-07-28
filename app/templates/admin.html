@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">country</th>
+                <th scope="col">Region</th>
+                <th scope="col">Description</th>
+                <th scope="col">Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for bean in beans %}
+            {% include '_admin_beans.html' %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

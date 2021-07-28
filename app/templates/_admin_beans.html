@@ -1,0 +1,28 @@
+<!-- TODO
+    - fix coupling with bean object; if I add/change the bean model I have to also change this class
+-->
+
+<tr>
+    <th scope="col">{{ bean.id }}</th>
+    <th scope="col">{{ bean.name }}</th>
+
+    {% if bean.country %}
+    <th scope="col">{{ bean.country }}</th>
+    {% else %}
+    <th scope="col">N/A</th>
+    {% endif %}
+
+    {% if bean.region %}
+    <th scope="col">{{ bean.region }}</th>
+    {% else %}
+    <th scope="col">N/A</th>
+    {% endif %}
+
+    {% if bean.description %}
+    <th scope="col">{{ bean.description }}</th>
+    {% else %}
+    <th scope="col">N/A</th>
+    {% endif %}
+
+    <th scope="col">{{ bean.rating }}</th>
+</tr>

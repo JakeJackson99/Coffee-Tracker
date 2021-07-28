@@ -4,7 +4,12 @@ from flask_login import UserMixin
 from app import db, login
 
 
-class Bean(UserMixin, db.Model):
+@login.user_loader
+def load_user(user_id):
+    return AdminUser.query.get(user_id)
+
+
+class Bean(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), index=True, nullable=False)
     country = db.Column(db.String(20), index=True)
@@ -13,7 +18,7 @@ class Bean(UserMixin, db.Model):
     rating = db.Column(db.Integer, index=True, nullable=False)
 
 
-class AdminUser(db.Model):
+class AdminUser(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20), index=True, nullable=False, unique=True)
     password_hash = db.Column(db.String(200), unique=True)
@@ -26,8 +31,3 @@ class AdminUser(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-
-
-@login.user_loader
-def load_user(user_id):
-    return AdminUser.get(user_id)

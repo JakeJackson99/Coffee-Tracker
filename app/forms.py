@@ -1,11 +1,17 @@
-from app import app, routes, db
-from app.models import Note
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, IntegerField
+from wtforms.validators import DataRequired, Length
 
 
-@app.shell_context_processor
-def make_shell_context():
-    return {'db': db, 'Note': Note}
+class LoginForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Sign In')
 
 
-if __name__ == "__main__":
-    app.run()
+class BeanForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    country = StringField('Country')
+    region = StringField('Region')
+    description = StringField('Description', validators=[Length(min=0, max=80)])
+    rating = IntegerField('Rating', validators=[DataRequired()])

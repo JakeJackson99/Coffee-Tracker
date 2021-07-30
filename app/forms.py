@@ -16,3 +16,4 @@ class BeanForm(FlaskForm):
     description = StringField('Description', validators=[
                               Length(min=0, max=80)])
     rating = IntegerField('Rating', validators=[DataRequired()])
+    submit = SubmitField('Add')

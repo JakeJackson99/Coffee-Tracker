@@ -2,9 +2,9 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user, logout_user, login_user
 from werkzeug.urls import url_parse
 
-from app import app
+from app import app, db
 from app.models import Bean, AdminUser
-from app.forms import LoginForm
+from app.forms import LoginForm, BeanForm
 
 
 @app.route('/')
@@ -20,11 +20,32 @@ def admin():
     return render_template('admin.html', beans=beans)
 
 
+@app.route('/add_bean', methods=['POST', 'GET'])
+@login_required
+def add_bean():
+    form = BeanForm()
+    if form.validate_on_submit():
+        bean = Bean(name=form.name.data, country=form.country.data,
+                    region=form.country.data,
+                    description=form.description.data, rating=form.rating.data)
+        db.session.add(bean)
+        db.session.commit()
+        flash('Successfully added a new bean')
+        return redirect(url_for('admin'))
+    return render_template('add_bean.html', title='Add New Bean', form=form)
+
+
+@app.route('/edit')
+@login_required
+def editBean():
+    pass
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('admin'))
-    
+
     form = LoginForm()
     if form.validate_on_submit():
         user = AdminUser.query.filter_by(name=form.name.data).first()
@@ -38,7 +59,7 @@ def login():
         if not next_page or url_parse(next_page).netloc != '':
             next_page = url_for('admin')
         return redirect(next_page)
-        
+
     return render_template('login.html', title='Sign In', form=form)
 
 

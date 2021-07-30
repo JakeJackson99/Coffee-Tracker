@@ -17,20 +17,22 @@
     {% if bean.country %}
     <th scope="col">{{ bean.country }}</th>
     {% else %}
-    <th scope="col">N/A</th>
+    <th scope="col">-</th>
     {% endif %}
 
     {% if bean.region %}
     <th scope="col">{{ bean.region }}</th>
     {% else %}
-    <th scope="col">N/A</th>
+    <th scope="col">-</th>
     {% endif %}
 
     {% if bean.description %}
     <th scope="col">{{ bean.description }}</th>
     {% else %}
-    <th scope="col">N/A</th>
+    <th scope="col">-</th>
     {% endif %}
 
     <th scope="col">{{ bean.rating }}</th>
+
+    <th scope="col"><a href="{{ url_for('editBean') }}">edit</a></th>
 </tr>

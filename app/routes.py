@@ -35,10 +35,35 @@ def add_bean():
     return render_template('add_bean.html', title='Add New Bean', form=form)
 
 
-@app.route('/edit')
+@app.route('/edit_bean/<bean_id>', methods=['GET', 'POST'])
 @login_required
-def editBean():
-    pass
+def edit_bean(bean_id):
+    form = BeanForm()
+    bean = Bean.query.filter_by(id=bean_id).first()     # Might not first()'
+    if form.validate_on_submit():
+        bean.name = form.name.data
+        bean.country = form.country.data
+        bean.region = form.region.data
+        bean.description = form.description.data
+        bean.rating = form.rating.data
+        db.session.commit()
+        flash('Your changes have been saved')
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        form.name.data = bean.name
+        form.country.data = bean.country
+        form.region.data = bean.region
+        form.description.data = bean.description
+        form.rating.data = bean.rating
+    return render_template('edit_bean.html', title='Edit Bean', form=form)
+
+
+@app.route('/remove_bean/<bean_id>', methods=['GET'])
+@login_required
+def remove_bean(bean_id):
+    Bean.query.filter_by(id=bean_id).delete()
+    db.session.commit()
+    return redirect(url_for('admin'))
 
 
 @app.route('/login', methods=['GET', 'POST'])

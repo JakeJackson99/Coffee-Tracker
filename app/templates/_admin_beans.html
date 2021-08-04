@@ -1,15 +1,3 @@
-<!-- TODO
-    - fix coupling with bean object; if I add/change the bean model I have to also change this class
-
-<tr>
-    {% for attr in bean.__dict__.keys() %}
-        {% if not attr.startswith('_') %}
-        <th scope="col">{{ attr }}</th>
-        {% endif %}
-    {% endfor %}
-</tr>
--->
-
 <tr>
     <th scope="col">{{ bean.id }}</th>
     <th scope="col">{{ bean.name }}</th>

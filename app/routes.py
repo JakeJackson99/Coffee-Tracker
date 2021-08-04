@@ -26,7 +26,7 @@ def add_bean():
     form = BeanForm()
     if form.validate_on_submit():
         bean = Bean(name=form.name.data, country=form.country.data,
-                    region=form.country.data,
+                    region=form.region.data,
                     description=form.description.data, rating=form.rating.data)
         db.session.add(bean)
         db.session.commit()
